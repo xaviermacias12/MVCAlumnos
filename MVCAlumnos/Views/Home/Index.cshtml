@@ -78,6 +78,26 @@
     {
         <div class="row g-2 justify-content-center">
             <div class="col-md-3 col-sm-6">
+                <a asp-controller="ProfesorPanel" asp-action="Index" class="text-decoration-none">
+                    <div class="card text-center border-0 shadow-sm">
+                        <div class="card-body py-3">
+                            <i class="fas fa-chalkboard fa-2x text-success"></i>
+                            <p class="mb-0 mt-2 fw-bold">Mi Perfil</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <a asp-controller="ProfesorPanel" asp-action="Edit" class="text-decoration-none">
+                    <div class="card text-center border-0 shadow-sm">
+                        <div class="card-body py-3">
+                            <i class="fas fa-edit fa-2x text-decoration-none"></i>
+                            <p class="mb-0 mt-2 fw-bold">Editar Perfil</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6">
                 <a asp-controller="ProfesorPanel" asp-action="MisMaterias" class="text-decoration-none">
                     <div class="card text-center border-0 shadow-sm">
                         <div class="card-body py-3">
@@ -109,6 +129,16 @@
                         <div class="card-body py-3">
                             <i class="fas fa-user-circle fa-2x text-info"></i>
                             <p class="mb-0 mt-2 fw-bold">Mi Perfil</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <a asp-controller="PerfilAlumno" asp-action="Edit" class="text-decoration-none">
+                    <div class="card text-center border-0 shadow-sm">
+                        <div class="card-body py-3">
+                            <i class="fas fa-edit fa-2x text-decoration-none"></i>
+                            <p class="mb-0 mt-2 fw-bold">Editar Perfil</p>
                         </div>
                     </div>
                 </a>

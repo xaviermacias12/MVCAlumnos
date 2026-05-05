@@ -1,0 +1,81 @@
+﻿@model MVCAlumnos.Models.Profesor
+
+@{
+    ViewData["Title"] = "Editar Mi Perfil";
+}
+
+<h2 class="mb-4"><i class="fas fa-user-edit"></i> Editar Mi Perfil</h2>
+<hr class="bg-dark mb-4" style="height: 2px; opacity: 1;" />
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i> Solo puedes modificar tu teléfono, especialidad y foto de perfil.
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Nombre" class="form-label fw-bold"></label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    <input asp-for="Nombre" class="form-control" readonly />
+                </div>
+                <small class="text-muted">El nombre no puede ser modificado. Contacta al administrador.</small>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Telefono" class="form-label fw-bold"></label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                    <input asp-for="Telefono" class="form-control" />
+                </div>
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Especialidad" class="form-label fw-bold"></label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-graduation-cap"></i></span>
+                    <input asp-for="Especialidad" class="form-control" />
+                </div>
+                <span asp-validation-for="Especialidad" class="text-danger"></span>
+            </div>
+
+            @if (!string.IsNullOrEmpty(Model.FotoUrl))
+            {
+                <div class="form-group mb-3">
+                    <label class="form-label fw-bold">Foto actual</label>
+                    <div>
+                        <img src="@Model.FotoUrl" width="100" height="100" class="rounded-circle border" />
+                    </div>
+                </div>
+            }
+
+            <div class="form-group mb-4">
+                <label class="form-label fw-bold">Cambiar foto</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-image"></i></span>
+                    <input type="file" name="foto" class="form-control" accept="image/*" />
+                </div>
+            </div>
+
+            <div class="form-group mt-4">
+                <button type="submit" class="btn btn-dark px-4 py-2">
+                    Guardar Cambios
+                </button>
+                <a asp-controller="Home" asp-action="Index" class="btn btn-secondary px-4 py-2">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

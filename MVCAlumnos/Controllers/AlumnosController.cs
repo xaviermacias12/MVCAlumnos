@@ -14,10 +14,10 @@ namespace MVCAlumnos.Controllers
     public class AlumnosController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AlumnosController(ApplicationDbContext context, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public AlumnosController(ApplicationDbContext context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
             _userManager = userManager;
@@ -94,12 +94,13 @@ namespace MVCAlumnos.Controllers
                 await _context.SaveChangesAsync();
 
                 // Crear usuario Identity con el mismo correo
-                var user = new IdentityUser
+                var user = new ApplicationUser
                 {
                     UserName = alumnos.Correo,
                     Email = alumnos.Correo,
-                    EmailConfirmed = true
-                };
+                    EmailConfirmed = true,
+                    DebeCambiarPassword = true
+                };  
 
                 var result = await _userManager.CreateAsync(user, "Alumno123!");
 
