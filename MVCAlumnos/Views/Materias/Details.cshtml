@@ -1,0 +1,45 @@
+﻿@model MVCAlumnos.Models.Materia
+
+@{
+    var esDelete = ViewContext.RouteData.Values["action"].ToString() == "Delete";
+    ViewData["Title"] = esDelete ? "Eliminar Materia" : "Detalles de la Materia";
+}
+
+<h2 class="mb-4">@ViewData["Title"]</h2>
+<hr class="bg-dark mb-4" style="height: 2px; opacity: 1;" />
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <dl class="row">
+            <dt class="col-sm-4">Nombre</dt>
+            <dd class="col-sm-8">@Model.Nombre</dd>
+
+            <dt class="col-sm-4">Carrera</dt>
+            <dd class="col-sm-8">@(Model.Carrera?.Nombre ?? "Sin asignar")</dd>
+
+            <dt class="col-sm-4">Créditos</dt>
+            <dd class="col-sm-8">@Model.Creditos</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="mt-4">
+    @if (!esDelete)
+    {
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+             Editar
+        </a>
+    }
+    else
+    {
+        <form asp-action="Delete" class="d-inline">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger">
+                Eliminar
+            </button>
+        </form>
+    }
+    <a asp-action="Index" class="btn btn-secondary">
+        Volver
+    </a>
+</div>

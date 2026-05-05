@@ -1,0 +1,85 @@
+﻿@model MVCAlumnos.Models.Carrera
+
+@{
+    var esCreate = ViewContext.RouteData.Values["action"].ToString() == "Create";
+    ViewData["Title"] = esCreate ? "Registrar Carrera" : "Editar Carrera";
+}
+
+<h2 class="mb-4">@ViewData["Title"]</h2>
+<hr class="bg-dark mb-4" style="height: 2px; opacity: 1;" />
+
+<div class="row mt-4">
+    <div class="col-md-8">
+        <form asp-action="@(esCreate ? "Create" : "Edit")">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+            @if (!esCreate)
+            {
+                <input type="hidden" asp-for="Id" />
+            }
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Nombre" class="form-label fw-bold mb-2"></label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-building"></i></span>
+                            <input asp-for="Nombre" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Nombre" class="text-danger mt-1"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Codigo" class="form-label fw-bold mb-2"></label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-code"></i></span>
+                            <input asp-for="Codigo" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Codigo" class="text-danger mt-1"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4 mt-2">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="DuracionSemestres" class="form-label fw-bold mb-2">Duración (semestres)</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                            <input asp-for="DuracionSemestres" class="form-control" />
+                        </div>
+                        <span asp-validation-for="DuracionSemestres" class="text-danger mt-1"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Descripcion" class="form-label fw-bold mb-2"></label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-align-left"></i></span>
+                            <textarea asp-for="Descripcion" class="form-control" rows="3"></textarea>
+                        </div>
+                        <span asp-validation-for="Descripcion" class="text-danger mt-1"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mt-5">
+                <button type="submit" class="btn btn-dark px-4 py-2">
+                    Guardar
+                </button>
+                <a asp-action="Index" class="btn btn-secondary px-4 py-2">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

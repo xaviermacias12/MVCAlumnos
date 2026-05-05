@@ -1,0 +1,143 @@
+﻿@{
+    ViewData["Title"] = "Inicio";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="alert alert-success text-center py-2 mb-4">
+        <i class="fas fa-check-circle"></i> Hola, <strong>@User.Identity.Name</strong> | Rol: <strong>@User.Claims.FirstOrDefault(c => c.Type == System.Security.Claims.ClaimTypes.Role)?.Value</strong>
+    </div>
+
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="row g-2">
+            <div class="col-md-2 col-sm-4 col-6">
+                <a asp-controller="Alumnos" asp-action="Index" class="text-decoration-none">
+                    <div class="card text-center border-0 shadow-sm h-100">
+                        <div class="card-body py-3">
+                            <i class="fas fa-users fa-2x text-primary"></i>
+                            <p class="mb-0 mt-2 small fw-bold">Alumnos</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-2 col-sm-4 col-6">
+                <a asp-controller="Profesors" asp-action="Index" class="text-decoration-none">
+                    <div class="card text-center border-0 shadow-sm h-100">
+                        <div class="card-body py-3">
+                            <i class="fas fa-chalkboard-user fa-2x text-success"></i>
+                            <p class="mb-0 mt-2 small fw-bold">Profesores</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-2 col-sm-4 col-6">
+                <a asp-controller="Materias" asp-action="Index" class="text-decoration-none">
+                    <div class="card text-center border-0 shadow-sm h-100">
+                        <div class="card-body py-3">
+                            <i class="fas fa-book fa-2x text-warning"></i>
+                            <p class="mb-0 mt-2 small fw-bold">Materias</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-2 col-sm-4 col-6">
+                <a asp-controller="Carreras" asp-action="Index" class="text-decoration-none">
+                    <div class="card text-center border-0 shadow-sm h-100">
+                        <div class="card-body py-3">
+                            <i class="fas fa-building fa-2x text-danger"></i>
+                            <p class="mb-0 mt-2 small fw-bold">Carreras</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-2 col-sm-4 col-6">
+                <a asp-controller="ProfesorMaterias" asp-action="Index" class="text-decoration-none">
+                    <div class="card text-center border-0 shadow-sm h-100">
+                        <div class="card-body py-3">
+                            <i class="fas fa-link fa-2x text-info"></i>
+                            <p class="mb-0 mt-2 small fw-bold">Prof-Mat</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-2 col-sm-4 col-6">
+                <a asp-controller="AlumnoMaterias" asp-action="Index" class="text-decoration-none">
+                    <div class="card text-center border-0 shadow-sm h-100">
+                        <div class="card-body py-3">
+                            <i class="fas fa-user-graduate fa-2x text-secondary"></i>
+                            <p class="mb-0 mt-2 small fw-bold">Alum-Mat</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    }
+
+    @if (User.IsInRole("Profesor"))
+    {
+        <div class="row g-2 justify-content-center">
+            <div class="col-md-3 col-sm-6">
+                <a asp-controller="ProfesorPanel" asp-action="MisMaterias" class="text-decoration-none">
+                    <div class="card text-center border-0 shadow-sm">
+                        <div class="card-body py-3">
+                            <i class="fas fa-chalkboard fa-2x text-success"></i>
+                            <p class="mb-0 mt-2 fw-bold">Mis Materias</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <a asp-controller="AlumnoMaterias" asp-action="Index" class="text-decoration-none">
+                    <div class="card text-center border-0 shadow-sm">
+                        <div class="card-body py-3">
+                            <i class="fas fa-user-plus fa-2x text-primary"></i>
+                            <p class="mb-0 mt-2 fw-bold">Asignar Alumnos</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    }
+
+    @if (User.IsInRole("Alumno"))
+    {
+        <div class="row g-2 justify-content-center">
+            <div class="col-md-3 col-sm-6">
+                <a asp-controller="PerfilAlumno" asp-action="Index" class="text-decoration-none">
+                    <div class="card text-center border-0 shadow-sm">
+                        <div class="card-body py-3">
+                            <i class="fas fa-user-circle fa-2x text-info"></i>
+                            <p class="mb-0 mt-2 fw-bold">Mi Perfil</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <a asp-controller="PerfilAlumno" asp-action="MisMaterias" class="text-decoration-none">
+                    <div class="card text-center border-0 shadow-sm">
+                        <div class="card-body py-3">
+                            <i class="fas fa-book-open fa-2x text-warning"></i>
+                            <p class="mb-0 mt-2 fw-bold">Mis Materias</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-5 text-center">
+            <div class="mb-4">
+                <i class="fas fa-shield-alt fa-4x text-secondary"></i>
+            </div>
+            <h3 class="fw-light">Sistema de Gestión Académica</h3>
+            <p class="text-muted mb-4">Accede con tu cuenta para continuar</p>
+            <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-dark px-5 py-2 rounded-pill">
+                <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
+            </a>
+        </div>
+    </div>
+}

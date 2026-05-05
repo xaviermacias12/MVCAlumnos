@@ -1,0 +1,62 @@
+﻿@model IEnumerable<MVCAlumnos.Models.Materia>
+
+@{
+    ViewData["Title"] = "Mis Materias";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1><i class="fas fa-chalkboard"></i> Mis Materias</h1>
+</div>
+<hr class="bg-dark mb-4" style="height: 2px; opacity: 1;" />
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Materia</th>
+                <th>Carrera</th>
+                <th>Créditos</th>
+                <th>Acciones</th>
+        </thead>
+        </thead>
+        <tbody>
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="4" class="text-center py-5">
+                        <i class="fas fa-info-circle fa-2x text-muted mb-2 d-block"></i>
+                        <h5 class="text-muted">No tienes materias asignadas</h5>
+                        <p class="text-muted">Contacta al administrador para que te asigne materias</p>
+                    </td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Nombre</td>
+                        <td>@(item.Carrera?.Nombre ?? "Sin asignar")</td>
+                        <td>@item.Creditos</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a asp-controller="AlumnoMaterias" asp-action="Index" asp-route-materiaId="@item.Id" class="btn btn-info btn-sm" title="Ver Alumnos">
+                                    <i class="fas fa-users"></i> Alumnos
+                                </a>
+                                <a asp-controller="AlumnoMaterias" asp-action="Create" asp-route-materiaId="@item.Id" class="btn btn-success btn-sm" title="Asignar Alumnos">
+                                    <i class="fas fa-user-plus"></i> Asignar
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="mt-4">
+    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">
+        Volver
+    </a>
+</div>

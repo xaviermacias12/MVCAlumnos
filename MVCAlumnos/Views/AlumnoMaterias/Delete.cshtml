@@ -1,0 +1,37 @@
+﻿@model MVCAlumnos.Models.AlumnoMateria
+
+@{
+    ViewData["Title"] = "Eliminar Asignación";
+}
+
+<h2 class="mb-4">Eliminar Asignación</h2>
+<hr class="bg-dark mb-4" style="height: 2px; opacity: 1;" />
+
+<div class="alert alert-warning">
+    ¿Está seguro de eliminar esta asignación?
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <dl class="row">
+            <dt class="col-sm-4">Alumno</dt>
+            <dd class="col-sm-8">@Model.Alumno?.Nombre</dd>
+
+            <dt class="col-sm-4">Materia</dt>
+            <dd class="col-sm-8">@Model.Materia?.Nombre</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="mt-4">
+    <form asp-action="Delete" class="d-inline">
+        <input type="hidden" asp-for="AlumnoId" />
+        <input type="hidden" asp-for="MateriaId" />
+        <button type="submit" class="btn btn-danger px-4 py-2">
+            Eliminar
+        </button>
+    </form>
+    <a asp-action="Index" class="btn btn-secondary px-4 py-2">
+        Cancelar
+    </a>
+</div>

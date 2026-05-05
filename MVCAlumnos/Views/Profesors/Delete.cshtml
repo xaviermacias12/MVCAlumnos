@@ -1,0 +1,61 @@
+﻿@model MVCAlumnos.Models.Profesor
+
+@{
+    var esDelete = ViewContext.RouteData.Values["action"].ToString() == "Delete";
+    ViewData["Title"] = esDelete ? "Eliminar Profesor" : "Detalles del Profesor";
+}
+
+<h2 class="mb-4">@ViewData["Title"]</h2>
+<hr class="bg-dark mb-4" style="height: 2px; opacity: 1;" />
+
+<div class="row mt-4">
+    <div class="col-md-3 text-center">
+        @if (!string.IsNullOrEmpty(Model.FotoUrl))
+        {
+            <img src="@Model.FotoUrl" width="150" height="150" class="rounded-circle border" />
+        }
+        else
+        {
+            <img src="/images/default-user.jpg" width="150" height="150" class="rounded-circle border" />
+        }
+    </div>
+    <div class="col-md-9">
+        <dl class="row">
+            <dt class="col-sm-3">Nombre</dt>
+            <dd class="col-sm-9">@Model.Nombre</dd>
+
+            <dt class="col-sm-3">Correo</dt>
+            <dd class="col-sm-9">@Model.Correo</dd>
+
+            <dt class="col-sm-3">Teléfono</dt>
+            <dd class="col-sm-9">@Model.Telefono</dd>
+
+            <dt class="col-sm-3">Especialidad</dt>
+            <dd class="col-sm-9">@Model.Especialidad</dd>
+
+            <dt class="col-sm-3">Carrera</dt>
+            <dd class="col-sm-9">@(Model.Carrera?.Nombre ?? "Sin asignar")</dd>
+        </dl>
+    </div>
+</div>
+
+<div class="mt-4">
+    @if (!esDelete)
+    {
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+            Editar
+        </a>
+    }
+    else
+    {
+        <form asp-action="Delete" class="d-inline">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn btn-danger">
+                Eliminar
+            </button>
+        </form>
+    }
+    <a asp-action="Index" class="btn btn-secondary">
+        Volver
+    </a>
+</div>

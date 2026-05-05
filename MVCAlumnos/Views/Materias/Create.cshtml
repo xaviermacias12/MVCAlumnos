@@ -1,0 +1,66 @@
+﻿@model MVCAlumnos.Models.Materia
+
+@{
+    var esCreate = ViewContext.RouteData.Values["action"].ToString() == "Create";
+    ViewData["Title"] = esCreate ? "Registrar Materia" : "Editar Materia";
+}
+
+<h2 class="mb-4">@ViewData["Title"]</h2>
+<hr class="bg-dark mb-4" style="height: 2px; opacity: 1;" />
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <form asp-action="@(esCreate ? "Create" : "Edit")">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+            @if (!esCreate)
+            {
+                <input type="hidden" asp-for="Id" />
+            }
+
+            <div class="form-group mb-4">
+                <label asp-for="Nombre" class="form-label fw-bold mb-2"></label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-tag"></i></span>
+                    <input asp-for="Nombre" class="form-control" />
+                </div>
+                <span asp-validation-for="Nombre" class="text-danger mt-1"></span>
+            </div>
+
+            <div class="form-group mb-4">
+                <label asp-for="CarreraId" class="form-label fw-bold mb-2">Carrera</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-building"></i></span>
+                    <select asp-for="CarreraId" class="form-select" asp-items="ViewBag.CarreraId">
+                        <option value="">-- Seleccione una carrera --</option>
+                    </select>
+                </div>
+                <span asp-validation-for="CarreraId" class="text-danger mt-1"></span>
+            </div>
+
+            <div class="form-group mb-4">
+                <label asp-for="Creditos" class="form-label fw-bold mb-2"></label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-star"></i></span>
+                    <input asp-for="Creditos" class="form-control" />
+                </div>
+                <span asp-validation-for="Creditos" class="text-danger mt-1"></span>
+            </div>
+
+            <div class="form-group mt-5">
+                <button type="submit" class="btn btn-dark px-4 py-2">
+                    Guardar
+                </button>
+                <a asp-action="Index" class="btn btn-secondary px-4 py-2">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

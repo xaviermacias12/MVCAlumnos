@@ -1,0 +1,53 @@
+﻿@model MVCAlumnos.Models.AlumnoMateria
+
+@{
+    ViewData["Title"] = "Asignar Materia a Alumno";
+}
+
+<h2 class="mb-4">Asignar Materia a Alumno</h2>
+<hr class="bg-dark mb-4" style="height: 2px; opacity: 1;" />
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+            <div class="form-group mb-4">
+                <label asp-for="AlumnoId" class="form-label fw-bold mb-2">Alumno</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    <select asp-for="AlumnoId" class="form-select" asp-items="ViewBag.AlumnoId">
+                        <option value="">-- Seleccione un alumno --</option>
+                    </select>
+                </div>
+                <span asp-validation-for="AlumnoId" class="text-danger mt-1"></span>
+            </div>
+
+            <div class="form-group mb-4">
+                <label asp-for="MateriaId" class="form-label fw-bold mb-2">Materia</label>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-book"></i></span>
+                    <select asp-for="MateriaId" class="form-select" asp-items="ViewBag.MateriaId">
+                        <option value="">-- Seleccione una materia --</option>
+                    </select>
+                </div>
+                <span asp-validation-for="MateriaId" class="text-danger mt-1"></span>
+            </div>
+
+            <div class="form-group mt-5">
+                <button type="submit" class="btn btn-dark px-4 py-2">
+                    Guardar
+                </button>
+                <a asp-action="Index" class="btn btn-secondary px-4 py-2">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
